@@ -54,6 +54,24 @@ public class UserManager implements UserService{
 	
 	
 	@Override
+	public void update(User user) {
+		this.userDao.update(user);
+		
+	}
+
+	@Override
+	public void delete(User user) {
+		this.userDao.delete(user);
+		
+	}
+
+	@Override
+	public User get(int id) {
+		return this.userDao.get(id);
+	}
+	
+	
+	@Override
 	public List<User> getAll() {
 		return this.userDao.getAll();
 	}
