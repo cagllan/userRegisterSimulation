@@ -3,6 +3,7 @@ package userRegisterSimulation;
 import userRegisterSimulation.business.abstracts.AuthService;
 import userRegisterSimulation.business.abstracts.UserService;
 import userRegisterSimulation.business.concretes.AuthManager;
+import userRegisterSimulation.business.concretes.MailManager;
 import userRegisterSimulation.business.concretes.UserManager;
 import userRegisterSimulation.dataAccess.concretes.InMemoryUserDao;
 import userRegisterSimulation.entities.concretes.User;
@@ -17,7 +18,7 @@ public class Main {
 		
 		UserService userManager = new UserManager(new InMemoryUserDao());
 	
-		AuthService authManager = new AuthManager(userManager);
+		AuthService authManager = new AuthManager(userManager, new MailManager());
 		
 		authManager.register(user1);
 		authManager.register(user2);

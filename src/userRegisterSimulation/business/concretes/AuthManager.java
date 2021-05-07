@@ -1,14 +1,17 @@
 package userRegisterSimulation.business.concretes;
 
 import userRegisterSimulation.business.abstracts.AuthService;
+import userRegisterSimulation.business.abstracts.MailService;
 import userRegisterSimulation.business.abstracts.UserService;
 import userRegisterSimulation.entities.concretes.User;
 
 public class AuthManager implements AuthService{
 	private UserService userService;
+	private MailService mailService;
 
-	public AuthManager(UserService userService) {
+	public AuthManager(UserService userService, MailService mailService) {
 		this.userService = userService;
+		this.mailService = mailService;
 	}
 
 	@Override
@@ -33,7 +36,15 @@ public class AuthManager implements AuthService{
 
 	@Override
 	public void register(User user) {
-		this.userService.add(user);
+		
+		mailService.sendMail(user.getEmail());
+		
+		if(mailService.verifyMail()) {
+			this.userService.add(user);
+		}else {
+			System.out.println("Kullanýcý doðrulanmadý kayýt baþarýsýz.");
+		}
+		
 		
 	}
 	
